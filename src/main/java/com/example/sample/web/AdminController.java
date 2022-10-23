@@ -55,8 +55,12 @@ public class AdminController {
     }
 
     @PostMapping("/createUser")
-    public ResponseEntity<String> createUser(@RequestBody UserDTO userDTO, Principal principal) {
-        String tempPassword = "tempPass1234";
+    public ResponseEntity<String> createUser(@RequestBody UserDTO userDTO) {
+        Double x = Math.random();
+        Integer a = userDTO.email.length();
+        Double result = Math.log(a/x);
+        String tempPassword = result.toString();
+
         User user = UserBuilder.instance()
                 .setEmail(userDTO.getEmail())
                 .setFirstName(userDTO.getFirstName())
@@ -65,8 +69,8 @@ public class AdminController {
                 .setActive(true)
                 .buildAndCreate(client);
 
-        String x = "{\"password\":\"" + tempPassword + "\"}";
+        String body = "{\"password\":\"" + tempPassword + "\"}";
 
-        return ResponseEntity.status(HttpStatus.OK).body(x);
+        return ResponseEntity.status(HttpStatus.OK).body(body);
     }
 }

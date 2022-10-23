@@ -1,6 +1,6 @@
 CREATE TABLE Persons
 (
-    id numeric not null,
+    id    numeric not null,
     email varchar(255) unique
 )
 
@@ -16,4 +16,7 @@ CREATE TABLE PersonsPermissionLink
     FOREIGN KEY (personEmail) references Persons (email),
     FOREIGN KEY (permissionName) references Permissions (name)
 )
+
+INSERT INTO Persons (id, email)
+VALUES (1, N'dankociolek97@gmail.com');
 
